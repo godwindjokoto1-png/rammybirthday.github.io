@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 14th Birthday, Rammy! 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #f0f9ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            color: #5a5a5a;
+        }
+        
+        /* Dancing Hearts */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            z-index: -1;
+            pointer-events: none;
+            animation: danceHeart 8s infinite ease-in-out;
+        }
+        
+        @keyframes danceHeart {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(-100px) translateX(20px) rotate(10deg); }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-200px) translateX(-30px) rotate(-10deg); opacity: 0; }
+        }
+        
+        /* Password Screen */
+        #password-screen {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.25);
+            text-align: center;
+            z-index: 10;
+            border: 3px solid #ffe6f0;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        #password-screen h2 {
+            color: #ff6b9d;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        #password-screen input {
+            padding: 14px;
+            margin: 14px 0;
+            width: 240px;
+            border: 2px solid #ffb3c6;
+            border-radius: 14px;
+            font-size: 17px;
+            text-align: center;
+            background: #fff9fb;
+            transition: all 0.3s;
+        }
+        
+        #password-screen input:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2);
+        }
+        
+        #password-screen button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fb1 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.4);
+            transform: scale(1);
+        }
+        
+        #password-screen button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.5);
+        }
+        
+        #password-screen button:active {
+            transform: scale(0.98);
+        }
+        
+        #password-screen button.clicked {
+            animation: buttonClick 0.6s ease-out;
+        }
+        
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+        
+        #error-message {
+            color: #ff6b9d;
+            margin-top: 14px;
+            font-weight: bold;
+            height: 24px;
+        }
+        
+        /* Main Content */
+        #main-content {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            padding: 2.5rem;
+            text-align: center;
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            margin-bottom: 2.5rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #4fc3f7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .age {
+            font-size: 2rem;
+            color: #ff6b9d;
+            margin-bottom: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            color: #8e8e8e;
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+        }
+        
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 22px;
+            margin: 2.5rem 0;
+        }
+        
+        .photo {
+            width: 170px;
+            height: 170px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.25);
+            transition: all 0.4s ease;
+            border: 4px solid white;
+        }
+        
+        .photo:hover {
+            transform: scale(1.1) rotate(4deg);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.35);
+            z-index: 2;
+        }
+        
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .message-container {
+            background: white;
+            padding: 2.2rem;
+            border-radius: 22px;
+            margin: 2.5rem 0;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            border: 2px solid #ffe6f0;
+        }
+        
+        .message-container h2 {
+            color: #ff6b9d;
+            margin-bottom: 1.8rem;
+            font-size: 2rem;
+        }
+        
+        .message {
+            margin: 20px 0;
+            padding: 16px;
+            background: #fdf6f9;
+            border-radius: 16px;
+            animation: fadeInUp 1s;
+            border-left: 5px solid #ff8fb1;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .music-controls {
+            margin-top: 2.5rem;
+        }
+        
+        .music-btn {
+            background: linear-gradient(135deg, #4fc3f7 0%, #81d4fa 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(79, 195, 247, 0.4);
+        }
+        
+        .music-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(79, 195, 247, 0.5);
+        }
+        
+        .music-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            margin-top: 2.5rem;
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dancing Hearts (will be added by JavaScript) -->
+    
+    <!-- Password Screen -->
+    <div id="password-screen">
+        <h2>🎀 Happy 14th Birthday, Rammy! 🎀</h2>
+        <p>Enter the secret password to unlock your celebration</p>
+        <input type="password" id="password-input" placeholder="Password">
+        <br>
+        <button id="enter-btn" onclick="checkPassword()">Unlock Celebration</button>
+        <div id="error-message"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="header">
+            <h1>Happy Birthday, Rammy!</h1>
+            <div class="age">🎉 14 Years Old! 🎉</div>
+            <p class="subtitle">May your life be long, blessed, and filled with joy! ✨</p>
+        </div>
+        
+        <div class="photo-gallery" id="photo-gallery">
+            <!-- Photos will be added here -->
+        </div>
+        
+        <div class="message-container">
+            <h2>💌 Special Birthday Wishes for Rammy</h2>
+            <div id="messages">
+                <!-- Messages will be added here -->
+            </div>
+        </div>
+        
+        <div class="music-controls">
+            <button class="music-btn" onclick="toggleMusic()">🎵 Play Birthday Melody</button>
+            <audio id="birthday-song" loop>
+                <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        
+        <footer>
+            Made with love • For Rammy's 14th Birthday 💖
+        </footer>
+    </div>
+
+    <script>
+        // 🔑 SET YOUR PASSWORD HERE!
+        const CORRECT_PASSWORD = "rammy14";
+        
+        // Create dancing hearts on load
+        function createDancingHearts() {
+            const heartEmojis = ['💖', '💗', '💓', '💕', '💞', '💝'];
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (6 + Math.random() * 8) + 's';
+                heart.style.fontSize = (18 + Math.random() * 12) + 'px';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // Password check with animation
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const error = document.getElementById('error-message');
+            const btn = document.getElementById('enter-btn');
+            
+            if (input === CORRECT_PASSWORD) {
+                // Add click animation
+                btn.classList.add('clicked');
+                setTimeout(() => {
+                    document.getElementById('password-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    addPhotos();
+                    addMessages();
+                }, 600);
+            } else {
+                error.textContent = "Oops! Wrong password. Try again!";
+                error.style.color = "#ff6b9d";
+                // Shake animation for error
+                error.style.transform = "translateX(0)";
+                setTimeout(() => { error.style.transform = "translateX(10px)"; }, 50);
+                setTimeout(() => { error.style.transform = "translateX(-10px)"; }, 100);
+                setTimeout(() => { error.style.transform = "translateX(0)"; }, 150);
+                document.getElementById('password-input').value = '';
+            }
+        }
+        
+        // Enter key support
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Add photos
+        function addPhotos() {
+            const gallery = document.getElementById('photo-gallery');
+            // REPLACE THESE WITH YOUR PHOTO URLS
+            const photoUrls = [
+                'https://placehold.co/170x170/ff6b9d/white?text=Rammy1',
+                'https://placehold.co/170x170/4fc3f7/white?text=Rammy2',
+                'https://placehold.co/170x170/ffb3c6/white?text=Rammy3'
+            ];
+            
+            photoUrls.forEach(url => {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo';
+                photoDiv.innerHTML = `<img src="${url}" alt="Rammy's Birthday">`;
+                gallery.appendChild(photoDiv);
+            });
+        }
+        
+        // Add messages
+        function addMessages() {
+            const messagesContainer = document.getElementById('messages');
+            const messages = [
+                "Happy 14th Birthday, Rammy! 🎂 May this special day be filled with joy, laughter, and all your favorite things!",
+                "To my wonderful and amazing Rammy — you’re growing into such a kind, smart, and beautiful soul. The world is brighter with you in it! ✨",
+                "As you turn 14, may God bless you with health, happiness, wisdom, and dreams that soar higher than the stars! 🌟",
+                "Wishing you a year ahead full of wonderful adventures, true friends, and moments that make your heart smile. You deserve it all! 💖",
+                "May your life be long, blessed, and filled with love, Rammy! Keep shining — your light inspires everyone around you! 🕊️💫"
+            ];
+            
+            messages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                messageDiv.textContent = msg;
+                messagesContainer.appendChild(messageDiv);
+            });
+        }
+        
+        // Music control
+        let isPlaying = false;
+        function toggleMusic() {
+            const audio = document.getElementById('birthday-song');
+            const button = document.querySelector('.music-btn');
+            
+            if (isPlaying) {
+                audio.pause();
+                button.textContent = '🎵 Play Birthday Melody';
+            } else {
+                audio.play().catch(e => {
+                    console.log("Autoplay blocked");
+                });
+                button.textContent = '⏸️ Pause Music';
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        // Initialize
+        window.addEventListener('load', () => {
+            createDancingHearts();
+        });
+    </script>
+</body>
+</html>
